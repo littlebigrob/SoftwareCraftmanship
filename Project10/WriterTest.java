@@ -43,8 +43,16 @@ public class WriterTest {
         Writer.getInstance().writeSolution(charListHelloWorld);
         fileReader=new FileReader("hw10out.txt");
         reader=new CharArrayReader(charListHelloWorld.toString().toCharArray());
+        int fileReaderChar;
+        int readerChar;
         while (fileReader.ready()&&reader.ready()){
-            assertTrue(fileReader.read()==(reader.read()));
+            fileReaderChar=fileReader.read();
+            readerChar=reader.read();
+            System.out.print(fileReaderChar);
+            System.out.print('\n');
+            System.out.print(readerChar);
+            System.out.print('\n');
+            assertTrue(readerChar==fileReaderChar);
         }
     }
 

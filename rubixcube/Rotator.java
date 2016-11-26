@@ -39,7 +39,7 @@ public class Rotator {
     }
 
     private void setBlocksAfterRotation(Color[] neighbors,Side side){
-
+        Neighbors.setNeighborhs(neighbors,side);
     }
 
 }

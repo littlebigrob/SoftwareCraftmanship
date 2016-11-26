@@ -48,11 +48,9 @@ public class Neighbors {
             tempArray[index+2]=sideToAdd[0];
         }
         else{
-            if (reverse){
                 tempArray[index]=sideToAdd[0];
                 tempArray[index+1]=sideToAdd[1];
                 tempArray[index+2]=sideToAdd[2];
-            }
         }
         return tempArray;
     }
@@ -159,5 +157,111 @@ public class Neighbors {
         return tempArray;
     }
 
+    public static void setNeighborhs(Color[] tempArray,Side side){
+        if (side.getposition().equals(Position.Front)){
+            setFrontNeighbors(tempArray);
+        }
+        else if (side.getposition().equals(Position.Left)){
+            setLeftNeighbors(tempArray);
+        }
+        else if (side.getposition().equals(Position.Bottom)){
+            setBottomNeighbors(tempArray);
+        }
+        else if (side.getposition().equals(Position.Back)){
+            setBackNeighbors(tempArray);
+        }
+        else if (side.getposition().equals(Position.Right)){
+            setRightNeighbors(tempArray);
+        }
+        else if (side.getposition().equals(Position.Top)){
+            setTopNeighbors(tempArray);
+        }
+    }
+
+    private static void setFrontNeighbors(Color[] tempArray) {
+        Side leftSide=partOf.cubeSides.get(Position.Left);
+        Side bottomSide=partOf.cubeSides.get(Position.Bottom);
+        Side rightSide=partOf.cubeSides.get(Position.Right);
+        Side topSide=partOf.cubeSides.get(Position.Top);
+        Color tempSideArray[]=new Color[3];
+        leftSide.setLeft(distribute(false,tempArray,tempSideArray,0));
+        bottomSide.setTop(distribute(true,tempArray,tempSideArray,3));
+        rightSide.setLeft(distribute(true,tempArray,tempSideArray,6));
+        topSide.setTop(distribute(false,tempArray,tempSideArray,9));
+    }
+
+    private static void setLeftNeighbors(Color[] tempArray) {
+        Side frontSide=partOf.cubeSides.get(Position.Front);
+        Side bottomSide=partOf.cubeSides.get(Position.Bottom);
+        Side backSide=partOf.cubeSides.get(Position.Back);
+        Side topSide=partOf.cubeSides.get(Position.Top);
+        Color tempSideArray[]=new Color[3];
+        frontSide.setLeft(distribute(false,tempArray,tempSideArray,0));
+        bottomSide.setTop(distribute(false,tempArray,tempSideArray,3));
+        backSide.setLeft(distribute(true,tempArray,tempSideArray,6));
+        topSide.setTop(distribute(true,tempArray,tempSideArray,9));
+    }
+
+    private static void setBackNeighbors(Color [] tempArray) {
+        Side leftSide = partOf.cubeSides.get(Position.Left);
+        Side bottomSide = partOf.cubeSides.get(Position.Bottom);
+        Side rightSide = partOf.cubeSides.get(Position.Right);
+        Side topSide = partOf.cubeSides.get(Position.Top);
+        Color tempSideArray[] = new Color[3];
+        leftSide.setRight(distribute(false, tempArray, tempSideArray, 0));
+        bottomSide.setBottom(distribute(false, tempArray, tempSideArray, 3));
+        rightSide.setRight(distribute(true, tempArray, tempSideArray, 6));
+        topSide.setBottom(distribute(true, tempArray, tempSideArray, 9));
+    }
+
+    private static void setRightNeighbors(Color[] tempArray) {
+        Side backSide=partOf.cubeSides.get(Position.Back);
+        Side bottomSide=partOf.cubeSides.get(Position.Bottom);
+        Side frontSide=partOf.cubeSides.get(Position.Front);
+        Side topSide=partOf.cubeSides.get(Position.Top);
+        Color tempSideArray[] = new Color[3];
+        backSide.setLeft(distribute(false, tempArray, tempSideArray, 0));
+        bottomSide.setRight(distribute(true, tempArray, tempSideArray, 3));
+        frontSide.setLeft(distribute(true, tempArray, tempSideArray, 6));
+        topSide.setRight(distribute(false, tempArray, tempSideArray, 9));
+    }
+
+    private static void setBottomNeighbors(Color[] tempArray) {
+        Side backSide=partOf.cubeSides.get(Position.Back);
+        Side rightSide=partOf.cubeSides.get(Position.Right);
+        Side frontSide=partOf.cubeSides.get(Position.Front);
+        Side leftSide=partOf.cubeSides.get(Position.Left);
+        Color tempSideArray[] = new Color[3];
+        backSide.setBottom(distribute(false, tempArray, tempSideArray, 0));
+        rightSide.setBottom(distribute(false, tempArray, tempSideArray, 3));
+        frontSide.setBottom(distribute(true, tempArray, tempSideArray, 6));
+        leftSide.setBottom(distribute(true, tempArray, tempSideArray, 9));
+    }
+
+    private static void setTopNeighbors(Color[] tempArray) {
+        Side backSide=partOf.cubeSides.get(Position.Back);
+        Side rightSide=partOf.cubeSides.get(Position.Right);
+        Side frontSide=partOf.cubeSides.get(Position.Front);
+        Side leftSide=partOf.cubeSides.get(Position.Left);
+        Color tempSideArray[] = new Color[3];
+        backSide.setTop(distribute(true, tempArray, tempSideArray, 0));
+        rightSide.setTop(distribute(true, tempArray, tempSideArray, 3));
+        frontSide.setTop(distribute(false, tempArray, tempSideArray, 6));
+        leftSide.setTop(distribute(false, tempArray, tempSideArray, 9));
+    }
+
+    private static Color[] distribute(boolean reverse, Color[] tempArray,Color[] sideToAdd, int index){
+        if (reverse){
+            sideToAdd[2]=tempArray[index];
+            sideToAdd[1]=tempArray[index+1];
+            sideToAdd[0]=tempArray[index+2];
+        }
+        else{
+            sideToAdd[0]=tempArray[index];
+            sideToAdd[1]=tempArray[index+1];
+            sideToAdd[2]=tempArray[index+2];
+            }
+        return sideToAdd;
+    }
 
 }

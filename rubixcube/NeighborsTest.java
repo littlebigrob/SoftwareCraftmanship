@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 public class NeighborsTest {
     @Test
     public void test(){
-        Color[] tempArray=new Color[12];
-        System.out.print(tempArray);
+
     }
 }

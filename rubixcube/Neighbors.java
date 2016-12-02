@@ -33,15 +33,8 @@ public class Neighbors {
         return tempArray;
     }
 
-    private static Color[] setSides(boolean reverse, Color[] tempArray,Color[] sideToAdd){
-        int index=0;
-        startFinderLoop:
-        for(int i=0; i<tempArray.length; i++){
-            if (tempArray[i].equals(0)){
-                index=i;
-                break startFinderLoop;
-            }
-        }
+    private static Color[] setSides(boolean reverse, Color[] tempArray,Color[] sideToAdd, int index){
+
         if (reverse){
             tempArray[index]=sideToAdd[2];
             tempArray[index+1]=sideToAdd[1];
@@ -65,10 +58,10 @@ public class Neighbors {
         Color tempBottomArray[]=bottomSide.getTop();
         Color tempRightArray []=rightSide.getLeft();
         Color tempTopArray[]=topSide.getTop();
-        tempArray=setSides(false,tempArray,tempLeftArray);
-        tempArray=setSides(true,tempArray,tempBottomArray);
-        tempArray=setSides(true,tempArray,tempRightArray);
-        tempArray=setSides(false,tempArray,tempTopArray);
+        tempArray=setSides(false,tempArray,tempLeftArray,0);
+        tempArray=setSides(true,tempArray,tempBottomArray,3);
+        tempArray=setSides(true,tempArray,tempRightArray,6);
+        tempArray=setSides(false,tempArray,tempTopArray,9);
         return tempArray;
     }
 
@@ -82,10 +75,10 @@ public class Neighbors {
         Color tempBottomArray[]=bottomSide.getLeft();
         Color tempBackArray []=backSide.getRight();
         Color tempTopArray[]=topSide.getLeft();
-        tempArray=setSides(false,tempArray,tempFrontArray);
-        tempArray=setSides(false,tempArray,tempBottomArray);
-        tempArray=setSides(true,tempArray,tempBackArray);
-        tempArray=setSides(true,tempArray,tempTopArray);
+        tempArray=setSides(false,tempArray,tempFrontArray,0);
+        tempArray=setSides(false,tempArray,tempBottomArray,3);
+        tempArray=setSides(true,tempArray,tempBackArray,6);
+        tempArray=setSides(true,tempArray,tempTopArray,9);
         return tempArray;
     }
 
@@ -99,10 +92,10 @@ public class Neighbors {
         Color tempBottomArray[]=bottomSide.getBottom();
         Color tempRightArray []=rightSide.getRight();
         Color tempTopArray[]=topSide.getBottom();
-        tempArray=setSides(false,tempArray,tempLeftArray);
-        tempArray=setSides(false,tempArray,tempBottomArray);
-        tempArray=setSides(true,tempArray,tempRightArray);
-        tempArray=setSides(true,tempArray,tempTopArray);
+        tempArray=setSides(false,tempArray,tempLeftArray,0);
+        tempArray=setSides(false,tempArray,tempBottomArray,3);
+        tempArray=setSides(true,tempArray,tempRightArray,6);
+        tempArray=setSides(true,tempArray,tempTopArray,9);
         return tempArray;
     }
 
@@ -116,10 +109,10 @@ public class Neighbors {
         Color tempBottomArray[]=bottomSide.getRight();
         Color tempFrontArray []=frontSide.getLeft();
         Color tempTopArray[]=topSide.getRight();
-        tempArray=setSides(false,tempArray,tempBackArray);
-        tempArray=setSides(true,tempArray,tempBottomArray);
-        tempArray=setSides(true,tempArray,tempFrontArray);
-        tempArray=setSides(false,tempArray,tempTopArray);
+        tempArray=setSides(false,tempArray,tempBackArray,0);
+        tempArray=setSides(true,tempArray,tempBottomArray,3);
+        tempArray=setSides(true,tempArray,tempFrontArray,6);
+        tempArray=setSides(false,tempArray,tempTopArray,9);
         return tempArray;
     }
 
@@ -133,10 +126,10 @@ public class Neighbors {
         Color tempRightArray[]=rightSide.getBottom();
         Color tempFrontArray []=frontSide.getBottom();
         Color tempLeftArray[]=leftSide.getBottom();
-        tempArray=setSides(false,tempArray,tempBackArray);
-        tempArray=setSides(false,tempArray,tempRightArray);
-        tempArray=setSides(true,tempArray,tempFrontArray);
-        tempArray=setSides(true,tempArray,tempLeftArray);
+        tempArray=setSides(false,tempArray,tempBackArray,0);
+        tempArray=setSides(false,tempArray,tempRightArray,3);
+        tempArray=setSides(true,tempArray,tempFrontArray,6);
+        tempArray=setSides(true,tempArray,tempLeftArray,9);
         return tempArray;
     }
 
@@ -150,10 +143,10 @@ public class Neighbors {
         Color tempRightArray[]=rightSide.getTop();
         Color tempFrontArray []=frontSide.getTop();
         Color tempLeftArray[]=leftSide.getTop();
-        tempArray=setSides(true,tempArray,tempBackArray);
-        tempArray=setSides(true,tempArray,tempRightArray);
-        tempArray=setSides(false,tempArray,tempFrontArray);
-        tempArray=setSides(false,tempArray,tempLeftArray);
+        tempArray=setSides(true,tempArray,tempBackArray,0);
+        tempArray=setSides(true,tempArray,tempRightArray,3);
+        tempArray=setSides(false,tempArray,tempFrontArray,6);
+        tempArray=setSides(false,tempArray,tempLeftArray,9);
         return tempArray;
     }
 

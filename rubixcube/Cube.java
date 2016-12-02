@@ -7,16 +7,24 @@ import java.util.HashMap;
  */
 public class Cube {
 
-    HashMap<Position, Side> cubeSides=new HashMap<>();
+    public static Cube getINSTANCE() {
+        return INSTANCE;
+    }
 
+    private static final Cube INSTANCE=new Cube();
+
+    HashMap<Position, Side> cubeSides=new HashMap<>();
+//prints out the cube
     public void printOutCube(){
         StringBuilder stringBuilder=new StringBuilder();
-        //the length of a single line of side.toString is 10 spaces and since i am replacing 2 sides i use 20
+        //this adds the strings for the top side;
         stringBuilder.append(addTopAndBottom(cubeSides.get(Position.Top).toString()));
         stringBuilder.append('\n');
+        //adds the four middle sides, Front, Left, Back, Right
         String strings;
         StringBuilder [] stringsArray=new StringBuilder[12];
         StringBuilder stringsBuilder= new StringBuilder();
+        //sets up the strings to always have a new line after the "row" ends
         stringsBuilder.append(cubeSides.get(Position.Front).toString());
         stringsBuilder.append('\n');
         stringsBuilder.append(cubeSides.get(Position.Left).toString());
@@ -26,6 +34,7 @@ public class Cube {
         stringsBuilder.append(cubeSides.get(Position.Right).backAndRightToString());
         strings=stringsBuilder.toString();
         int newLineCounter=0;
+        //takes out all new line char
         for (int i=0;i<stringsArray.length;i++){
             stringsArray[i]=new StringBuilder();
         }
@@ -37,22 +46,17 @@ public class Cube {
                 stringsArray[newLineCounter].append(strings.charAt(i));
             }
         }
+        //adds new lines at the end of right
         stringsArray[9].append('\n');
         stringsArray[10].append('\n');
         stringsArray[11].append('\n');
-        stringBuilder.append(stringsArray[0]);
-        stringBuilder.append(stringsArray[3]);
-        stringBuilder.append(stringsArray[6]);
-        stringBuilder.append(stringsArray[9]);
-        stringBuilder.append(stringsArray[1]);
-        stringBuilder.append(stringsArray[4]);
-        stringBuilder.append(stringsArray[7]);
-        stringBuilder.append(stringsArray[10]);
-        stringBuilder.append(stringsArray[2]);
-        stringBuilder.append(stringsArray[5]);
-        stringBuilder.append(stringsArray[8]);
-        stringBuilder.append(stringsArray[11]);
-
+        for (int i=0; i<3;i++){
+            stringBuilder.append(stringsArray[i]);
+            stringBuilder.append(stringsArray[3+i]);
+            stringBuilder.append(stringsArray[6+i]);
+            stringBuilder.append(stringsArray[9+i]);
+        }
+        //puts in the bottom arrays
         stringBuilder.append(addTopAndBottom(cubeSides.get(Position.Bottom).bottomToString()));
         System.out.print(stringBuilder.toString());
     }
@@ -63,6 +67,7 @@ public class Cube {
         for (int i=0; i<topSide.length();i++){
             stringBuilder.append(topSide.charAt(i));
             if (topSide.charAt(i)=='\n'){
+                //the length of a single line of side.toString is 10 spaces and since i am replacing 2 sides i use 20
                     stringBuilder.append("                    ");
 
             }
@@ -122,7 +127,7 @@ public class Cube {
         }
         for (int i: colorCounter.values()) {
             if (i!=9){
-                ErrorLogger error=new ErrorLogger("there are not enough of a given color");
+                ErrorLogger error=new ErrorLogger("there are not enough of a given color \n");
             }
         }
     }
@@ -133,23 +138,37 @@ public class Cube {
             centerColortoSide.put(colors[i][4],i);
         }
         if (centerColortoSide.size()!=6){
-            ErrorLogger error=new ErrorLogger("there are non distinct center sides for this cube");
+            ErrorLogger error=new ErrorLogger("there are non distinct center sides for this cube\n");
         }
     }
 
     private void correctDementions(Color[][] colors) {
         for (int i=0; i<colors.length;i++){
             if (colors[i].length!=9){
-                ErrorLogger error=new ErrorLogger("side "+i+" does not have enough colors");
+                ErrorLogger error=new ErrorLogger("side "+i+" does not have enough colors\n");
             }
         }
     }
 
     private void correctSides(Color[][] colors) {
         if (colors.length!=6){
-            ErrorLogger error=new ErrorLogger("not enough sides in this cube");
+            ErrorLogger error=new ErrorLogger("not enough sides in this cube\n");
         }
     }
 
+    public class Tester{
+       public void correctSides(Color[][] colors){
+           Cube.getINSTANCE().correctSides(colors);
+       }
+       public void correctDementions(Color[][] colors){
+           Cube.getINSTANCE().correctDementions(colors);
+        }
+       public void areCentersUnique(Color[][]  colors){
+           Cube.getINSTANCE().areCentersUnique(colors);
+        }
+       public void colorCount(Color[][]  colors){
+           Cube.getINSTANCE().colorCount(colors);
+       }
+    }
 
 }

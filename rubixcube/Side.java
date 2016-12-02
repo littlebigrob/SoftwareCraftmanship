@@ -39,7 +39,7 @@ public class Side {
         face=new Color[height][width];
         for (int i=0; i<height; i++){
             for (int index=0; index<width;index++){
-                face[i][index]=color[(i+1)*(index+1)];
+                face[i][index]=color[(i)*3+(index)];
             }
         }
     }

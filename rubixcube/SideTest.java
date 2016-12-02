@@ -15,12 +15,19 @@ public class SideTest {
     Side side;
     @Before
     public void setUp(){
-        side=new Side(Position.Bottom, Color.R, 3,3,cube);
+        Color[] array={Color.W,Color.O,Color.R,Color.O,Color.B,Color.O,Color.G,Color.O,Color.Y};
+        side=new Side(Position.Bottom, array, 3,3,cube);
     }
 
     @Test
     public void testToString(){
         System.out.print(side.toString());
+        System.out.print('\n');
+        System.out.print('\n');
+        System.out.print(side.backAndRightToString());
+        System.out.print('\n');
+        System.out.print('\n');
+        System.out.print(side.bottomToString());
     }
 
 }
